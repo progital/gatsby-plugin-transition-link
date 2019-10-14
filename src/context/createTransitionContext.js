@@ -1,7 +1,8 @@
 import { createContext } from "react";
 
-const { Provider, Consumer } = createContext();
+const transitionContext = createContext();
+const { Provider, Consumer } = transitionContext;
 const publicContext = createContext();
 const { Provider: PublicProvider, Consumer: PublicConsumer } = publicContext;
 
-export { Provider, Consumer, PublicProvider, PublicConsumer, publicContext };
+export { Provider, Consumer, PublicProvider, PublicConsumer, publicContext, transitionContext };
