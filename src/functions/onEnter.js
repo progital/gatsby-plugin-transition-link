@@ -1,4 +1,4 @@
-import { setTimeout } from "requestanimationframe-timer";
+import { setTimeout } from 'requestanimationframe-timer';
 
 const onEnter = ({
   node,
@@ -10,23 +10,27 @@ const onEnter = ({
   pathname,
   entryProps: { delay = 0 },
   appearAfter = 0,
-  e
+  e,
 }) => {
   if (inTransition) {
     setTimeout(() => {
       window.scrollTo(0, 0);
     }, appearAfter);
   } else {
-    // If session storage fails due to cookies being disabled, 
+    // If session storage fails due to cookies being disabled,
     // scroll to the top after every navigation
     let position = [0, 0];
     try {
       const storageKey = `@@scroll|${pathname}`;
       position = JSON.parse(sessionStorage.getItem(storageKey));
-    }
-    catch(e) {
-      console.warn(`[gatsby-plugin-transition-link] Unable to save state in sessionStorage; sessionStorage is not available.`)
+    } catch (e) {
+      console.warn(
+        `[gatsby-plugin-transition-link] Unable to save state in sessionStorage; sessionStorage is not available.`
+      );
     } finally {
+      if (!Array.isArray(position)) {
+        position = [0, 0];
+      }
       window.scrollTo(...position);
     }
   }
@@ -44,16 +48,16 @@ const onEnter = ({
   triggerResolve.entry({
     ...entryPropsTrimmed,
     visible: visiblePromise,
-    node
+    node,
   });
 
   entryTrigger &&
-    typeof entryTrigger === "function" &&
+    typeof entryTrigger === 'function' &&
     entryTrigger({
       entry: entryProps,
       exit: exitProps,
       node,
-      e
+      e,
     });
 };
 

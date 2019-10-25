@@ -112,14 +112,8 @@ export default class TransitionHandler extends Component {
                             ...states,
                           });
 
-                          const exitZindex =
-                            typeof exitProps.zIndex !== 'undefined'
-                              ? exitProps.zIndex
-                              : 0;
-                          const entryZindex =
-                            typeof exitProps.zIndex !== 'undefined'
-                              ? entryProps.zIndex
-                              : 1;
+                          const { zIndex: exitZindex = 0 } = exitProps;
+                          const { zIndex: entryZindex = 1 } = entryProps;
 
                           return (
                             <TransitionRenderer
@@ -128,9 +122,10 @@ export default class TransitionHandler extends Component {
                               exitZindex={exitZindex}
                               transitionStatus={transitionStatus}
                               transitionState={transitionState}
-                              children={children}
                               appearAfter={getMs(appearAfter)}
-                            />
+                            >
+                              {children}
+                            </TransitionRenderer>
                           );
                         }}
                       </DelayedTransition>
