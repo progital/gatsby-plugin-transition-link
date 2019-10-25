@@ -20,11 +20,7 @@
   "author": "Tyler Barnes <tyler@known.design>",
   "license": "MIT",
   "scripts": {
-    "release": "standard-version",
-    "copy-files": "mkdir lib || true && cp .eslintrc.json readme.md package.json lib",
-    "build": "yarn copy-files && babel src --out-dir lib --copy-files --ignore **/__tests__",
-    "watch": "yarn copy-files && babel -w src --out-dir lib --copy-files --ignore **/__tests__",
-    "npm-publish": "git push --follow-tags origin master && yarn build && cd lib && npm publish && cd ../"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "devDependencies": {
     "@babel/cli": "^7.1.2",
