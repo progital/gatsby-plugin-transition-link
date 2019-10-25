@@ -33,3 +33,8 @@ coverage
 decls
 examples
 example
+
+.prettierignore
+.prettierrc
+todo
+.eslintrc.json
