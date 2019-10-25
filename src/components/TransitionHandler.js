@@ -1,17 +1,17 @@
-import React, { Component } from "react";
-import { Transition, TransitionGroup } from "react-transition-group";
-import { Location } from "@reach/router";
+import React, { Component } from 'react';
+import { Transition, TransitionGroup } from 'react-transition-group';
+import { Location } from '@reach/router';
 
-import TransitionRenderer from "./TransitionRenderer";
-import { LayoutComponent as Layout } from "./Layout";
-import delayTransitionRender from "./delayTransitionRender";
-import { Consumer } from "../context/createTransitionContext";
-import { returnTransitionState } from "../utils/returnTransitionState";
-import { onEnter } from "../functions/onEnter";
-import { onExit } from "../functions/onExit";
-import { getMs } from "../utils/secondsMs";
+import TransitionRenderer from './TransitionRenderer';
+import { LayoutComponent as Layout } from './Layout';
+import delayTransitionRender from './delayTransitionRender';
+import { Consumer } from '../context/createTransitionContext';
+import { returnTransitionState } from '../utils/returnTransitionState';
+import { onEnter } from '../functions/onEnter';
+import { onExit } from '../functions/onExit';
+import { getMs } from '../utils/secondsMs';
 
-import "../style.css";
+import '../style.css';
 
 const DelayedTransition = delayTransitionRender(Transition);
 export default class TransitionHandler extends Component {
@@ -36,7 +36,7 @@ export default class TransitionHandler extends Component {
           updateContext,
           triggerResolve,
           appearAfter,
-          e
+          e,
         }) => {
           return (
             <Location>
@@ -49,7 +49,7 @@ export default class TransitionHandler extends Component {
                         delay={getMs(entryDelay)}
                         timeout={{
                           enter: getMs(entryLength),
-                          exit: getMs(exitLength)
+                          exit: getMs(exitLength),
                         }}
                         onEnter={node =>
                           !!node &&
@@ -65,7 +65,7 @@ export default class TransitionHandler extends Component {
                             updateContext,
                             triggerResolve,
                             appearAfter: getMs(appearAfter),
-                            e
+                            e,
                           })
                         }
                         onExit={node =>
@@ -78,26 +78,26 @@ export default class TransitionHandler extends Component {
                             entryProps,
                             exitProps,
                             triggerResolve,
-                            e
+                            e,
                           })
                         }
                       >
                         {transitionStatus => {
                           const mount =
-                            transitionStatus === "entering" ||
-                            transitionStatus === "entered";
+                            transitionStatus === 'entering' ||
+                            transitionStatus === 'entered';
 
                           const states = {
                             entry: {
                               state: entryState,
                               delay: entryDelay,
-                              length: entryLength
+                              length: entryLength,
                             },
                             exit: {
                               state: exitState,
                               delay: exitDelay,
-                              length: exitLength
-                            }
+                              length: exitLength,
+                            },
                           };
 
                           const current = mount ? states.entry : states.exit;
@@ -109,11 +109,17 @@ export default class TransitionHandler extends Component {
                             transitionStatus,
                             current,
                             mount,
-                            ...states
+                            ...states,
                           });
 
-                          const exitZindex = exitProps.zIndex || 0;
-                          const entryZindex = entryProps.zIndex || 1;
+                          const exitZindex =
+                            typeof exitProps.zIndex !== 'undefined'
+                              ? exitProps.zIndex
+                              : 0;
+                          const entryZindex =
+                            typeof exitProps.zIndex !== 'undefined'
+                              ? entryProps.zIndex
+                              : 1;
 
                           return (
                             <TransitionRenderer

@@ -1,11 +1,11 @@
 {
   "name": "@progital/gatsby-plugin-transition-link",
-  "version": "1.15.0",
+  "version": "1.15.1",
   "description": "A link component for page transitions in gatsby.",
-  "repository": "https://github.com/TylerBarnes/gatsby-plugin-transition-link",
+  "repository": "https://github.com/progital/gatsby-plugin-transition-link",
   "homepage": "https://gatsby-plugin-transition-link.netlify.com/",
   "bugs": {
-    "url": "https://github.com/TylerBarnes/gatsby-plugin-transition-link/issues"
+    "url": "https://github.com/progital/gatsby-plugin-transition-link/issues"
   },
   "keywords": [
     "gatsby",
@@ -32,6 +32,17 @@
     "@babel/plugin-proposal-class-properties": "^7.1.0",
     "@babel/preset-env": "^7.1.0",
     "@babel/preset-react": "^7.0.0",
+    "babel-eslint": "^10.0.3",
+    "cross-env": "^5.1.4",
+    "eslint": "^6.0.1",
+    "eslint-config-google": "^0.13.0",
+    "eslint-config-prettier": "^6.0.0",
+    "eslint-plugin-babel": "^5.3.0",
+    "eslint-plugin-import": "^2.18.0",
+    "eslint-plugin-jsx-a11y": "^6.2.3",
+    "eslint-plugin-prettier": "^3.1.0",
+    "eslint-plugin-react": "^7.14.2",
+    "prettier": "^1.18.2",
     "rimraf": "^2.6.2",
     "standard-version": "^5.0.2"
   },

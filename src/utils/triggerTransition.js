@@ -1,8 +1,8 @@
-import { navigate } from "gatsby";
-import random from "lodash/random";
-import { setTimeout } from "requestanimationframe-timer";
-import { getMs } from "./secondsMs";
-import getPagesPromises from "./getPagesPromises";
+import { navigate } from 'gatsby';
+import random from 'lodash/random';
+import { setTimeout } from 'requestanimationframe-timer';
+import { getMs } from './secondsMs';
+import getPagesPromises from './getPagesPromises';
 
 const triggerTransition = ({
   to,
@@ -15,14 +15,16 @@ const triggerTransition = ({
   trigger,
   updateContext,
   linkState,
-  replace
+  replace,
 }) => {
   if (event) {
     event.persist();
     event.preventDefault();
   }
 
-  if (inTransition) return false;
+  if (inTransition) {
+    return false;
+  }
 
   // these globals prevent the back button from being pressed during a transition as that can have unexpected results
   window.__tl_inTransition = true;
@@ -33,10 +35,10 @@ const triggerTransition = ({
     exitDelay: 0,
     exitLength: 0,
     appearAfter: 0,
-    exitState: {}
+    exitState: {},
   });
 
-  if (trigger && typeof trigger === "function") {
+  if (trigger && typeof trigger === 'function') {
     trigger(pages);
   }
 
@@ -44,14 +46,14 @@ const triggerTransition = ({
     length: exitLength = 0,
     delay: exitDelay = 0,
     state: exitState = {},
-    trigger: exitTrigger = () => {}
+    trigger: exitTrigger = () => {},
   } = exit;
   const {
     length: entryLength = 1, // this allows scrollposition to be reset when there is no transition.
     delay: entryDelay = 0,
     state: entryState = {},
     trigger: entryTrigger = () => {},
-    appearAfter = 0
+    appearAfter = 0,
   } = entry;
 
   updateContext({
@@ -64,7 +66,7 @@ const triggerTransition = ({
     appearAfter,
     exitTrigger: (exit, node, e) => exitTrigger(exit, node, e),
     entryTrigger: (entry, node, e) => entryTrigger(entry, node, e),
-    e: event
+    e: event,
   });
 
   // after exitDelay
@@ -74,14 +76,14 @@ const triggerTransition = ({
     navigate(to, {
       state: {
         transitionId,
-        ...linkState
+        ...linkState,
       },
-      replace
+      replace,
     });
 
     updateContext({
       exitState: exitState,
-      transitionIdHistory: [...transitionIdHistory, transitionId]
+      transitionIdHistory: [...transitionIdHistory, transitionId],
     });
   }, getMs(exitDelay));
 
@@ -97,7 +99,7 @@ const triggerTransition = ({
       updateContext({
         entryDelay: 0,
         appearAfter: 0,
-        entryLength: 0
+        entryLength: 0,
       }),
     getMs(exitDelay + entryDelay + entryLength)
   );
@@ -119,7 +121,7 @@ const triggerTransition = ({
       // Once all animation is finished, it's safe to start a new animation since we're no longer inTransition.
       inTransition: false,
       // create new page promises for the trigger prop
-      ...getPagesPromises()
+      ...getPagesPromises(),
     });
   }, getMs(finalResetSeconds) + 1);
 };

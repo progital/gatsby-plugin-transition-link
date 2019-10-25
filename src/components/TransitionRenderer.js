@@ -1,10 +1,10 @@
-import React, { Component, cloneElement } from "react";
-import { setTimeout, clearTimeout } from "requestanimationframe-timer";
-import { PublicProvider } from "../context/createTransitionContext";
+import React, { Component, cloneElement } from 'react';
+import { setTimeout, clearTimeout } from 'requestanimationframe-timer';
+import { PublicProvider } from '../context/createTransitionContext';
 
 export default class TransitionRenderer extends Component {
   state = {
-    shouldBeVisible: !!!this.props.appearAfter
+    shouldBeVisible: !this.props.appearAfter,
   };
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -16,9 +16,9 @@ export default class TransitionRenderer extends Component {
   }
 
   componentDidMount = () => {
-    const delay = typeof this.props.delay === "number" ? this.props.delay : 0;
+    const delay = typeof this.props.delay === 'number' ? this.props.delay : 0;
     const appearafter =
-      typeof this.props.appearAfter === "number" ? this.props.appearAfter : 0;
+      typeof this.props.appearAfter === 'number' ? this.props.appearAfter : 0;
     const timeout = delay + appearafter;
 
     this.appearTimeout = setTimeout(
@@ -38,23 +38,23 @@ export default class TransitionRenderer extends Component {
       exitZindex,
       transitionStatus,
       transitionState,
-      children
+      children,
     } = this.props;
 
     return (
       <div
         className={`tl-wrapper ${
-          mount ? "tl-wrapper--mount" : "tl-wrapper--unmount"
+          mount ? 'tl-wrapper--mount' : 'tl-wrapper--unmount'
         } tl-wrapper-status--${transitionStatus}`}
         style={{
           zIndex: mount ? entryZindex : exitZindex,
-          opacity: this.state.shouldBeVisible ? 1 : 0
+          opacity: this.state.shouldBeVisible ? 1 : 0,
         }}
       >
         <PublicProvider value={{ ...transitionState }}>
           {/* pass transition state to page/template */}
           {cloneElement(children, {
-            ...transitionState
+            ...transitionState,
           })}
         </PublicProvider>
       </div>
